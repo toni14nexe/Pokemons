@@ -83,4 +83,19 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: white;
+}
+
+.main {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.router {
+  border: solid 2px white;
+  border-radius: 1rem;
+  background: rgb(0, 0, 0, 0.5);
+  width: fit-content;
+  min-width: 60vh;
 }

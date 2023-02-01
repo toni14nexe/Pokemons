@@ -10,8 +10,8 @@ let component = ref('home')
 
 <template>
 	<Header class="header" @change="(result) => component = result" />
-	<el-main class="bg-opacity">
-		<RouterView :component="component" />
+	<el-main class="bg-opacity main">
+		<RouterView class="router" :component="component" />
 	</el-main>
 </template>
 
