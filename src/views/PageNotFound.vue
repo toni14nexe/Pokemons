@@ -8,7 +8,11 @@ emits('componentChange', 'PageNotFound')
 </script>
 
 <template>
-	<h1 class="mt-8">Page Not Found</h1>
+	<el-container>
+        <el-col align="center">
+            <h1>Page not found</h1>
+        </el-col>
+    </el-container>
 </template>
 
 <style scoped>
