@@ -16,6 +16,21 @@ export const useUsersStore = defineStore("users", {
 			throw error
 		}
 	},
+	async login(userData) {
+		try {
+			let userOK = false
+			let response = await axios.get(serverHost)
+			response.data.forEach(user => {
+				if(user.username === userData.username && user.password === userData.password){
+					userOK = true
+					stop
+				}
+			});
+			return userOK
+		} catch (error) {
+			throw error
+		}
+	},
 	async signUp(userData) {
 		try {
 			let response = await axios.post(serverHost, userData)

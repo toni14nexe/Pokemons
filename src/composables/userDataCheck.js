@@ -16,13 +16,21 @@ const username = (username) => {
     }
 }
 
-const password = (password1, password2) => {
+const passwordSignUp = (password1, password2) => {
     if(password1.length > 7){
         if (password1 == password2) {
             null
         } else {
             return 'Passwords do not match!';
         }
+    } else{
+        return 'Min password length is 8 characters!';
+    }
+}
+
+const passwordLogIn = (password) => {
+    if(password.length > 7){
+        return null
     } else{
         return 'Min password length is 8 characters!';
     }
@@ -36,6 +44,16 @@ export const checkSignInData = (user, password2) => {
     }
     response.email = email(user.email)
     response.username = username(user.username)
-    response.password = password(user.password, password2)
+    response.password = passwordSignUp(user.password, password2)
+    return response
+}
+
+export const checkLogInData = (user) => {
+    let response = {
+        username: null,
+        password: null
+    }
+    response.username = username(user.username)
+    response.password = passwordLogIn(user.password)
     return response
 }
