@@ -31,7 +31,7 @@ const emits = defineEmits<{
 		</el-menu-item>
 		<div class="flex-grow" />
 		<el-space style="color: black" spacer="|" class="pr-3">
-			<el-menu-item index="registration" @click="switchTo('registration')">SignUp</el-menu-item>
+			<el-menu-item index="registration" @click="switchTo('signup')">SignUp</el-menu-item>
 			<el-menu-item index="login" @click="switchTo('login')">Login</el-menu-item>
 		</el-space>
 	</el-menu>

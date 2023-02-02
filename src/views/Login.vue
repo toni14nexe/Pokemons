@@ -1,6 +1,5 @@
 <script setup lang="ts">
 // @ts-nocheck
-let dialogVisible = true
 </script>
 
 <template>

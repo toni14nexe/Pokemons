@@ -20,9 +20,14 @@ const router = createRouter({
 			component: () => import("../views/Login.vue")
 		},
 		{
-			path: "/Registration",
-			name: "registration",
-			component: () => import("../views/Registration.vue")
+			path: "/signup",
+			name: "signUp",
+			component: () => import("../views/SignUp.vue")
+		},
+		{
+			path: "/:catchAll(.*)",
+			name: "NotFound",
+			component: () => import("../views/PageNotFound.vue"),
 		}
 	]
 })
