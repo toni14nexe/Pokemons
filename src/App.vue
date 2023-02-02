@@ -6,12 +6,18 @@ import Header from "./components/Header.vue"
 
 let component = ref('home')
 
+function switchComponent(result){
+	component.value = result
+}
 </script>
 
 <template>
-	<Header class="header" @change="(result) => component = result" />
+	<Header class="header" @componentChange="(result) => switchComponent(result)" />
 	<el-main class="bg-opacity main">
-		<RouterView class="router" :component="component" />
+		<RouterView 
+			:class="{ router: component != '' && component != 'home' }"
+			@componentChange="(result) => switchComponent(result)"
+		/>
 	</el-main>
 </template>
 

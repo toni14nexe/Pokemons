@@ -1,28 +1,28 @@
 <script setup lang="ts">
-// @ts-nocheck
-import { ref } from 'vue'
+import router from "../router/index"
+import { ref } from "vue"
+// @ts-nocheck 
+let component = ref('home')
 
-const component = ref('home')
+function switchTo(componentForSwitch){
+	router.push({ path: `/${componentForSwitch}/` })
+	emits('componentChange', componentForSwitch)
+}
 
 const emits = defineEmits<{
-  	(event: "change", value: string);
+  (event: "componentChange", value: string): string;
 }>();
-
-function switchComponent(component){
-	component = component
-	emits('change', component)
-}
 </script>
 
 <template>
 	<el-menu
-		style="opacity: 0.9"
+		style="opacity: 0.9;"
 		class="hover-pointer"
 		:default-active="component"
 		mode="horizontal"
 		:ellipsis="false"
 	>
-		<el-menu-item index="home" @click="switchComponent('home')">
+		<el-menu-item index="home" @click="switchTo('home')">
 			<el-space wrap>
 				<el-icon class="ml-3 hover-pointer">
 					<img class="logo-fix" src="@/assets/images/logo.png"/>
@@ -30,9 +30,9 @@ function switchComponent(component){
 			</el-space>
 		</el-menu-item>
 		<div class="flex-grow" />
-		<el-space spacer="|" class="pr-3">
-			<el-menu-item index="registration" @click="switchComponent('registration')">Registration</el-menu-item>
-			<el-menu-item index="login" @click="switchComponent('login')">Login</el-menu-item>
+		<el-space style="color: black" spacer="|" class="pr-3">
+			<el-menu-item index="registration" @click="switchTo('registration')">SignUp</el-menu-item>
+			<el-menu-item index="login" @click="switchTo('login')">Login</el-menu-item>
 		</el-space>
 	</el-menu>
 </template>
@@ -45,5 +45,11 @@ function switchComponent(component){
 
 .flex-grow {
   flex-grow: 1;
+}
+
+@media screen and (max-width: 300px) {
+	.ml-3{
+		margin-left: 0;
+	}
 }
 </style>
