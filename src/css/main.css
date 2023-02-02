@@ -1,5 +1,6 @@
 @import './base.css';
 @import './helpers.css';
+@import './element-plus.css';
 
 /*
 #app {
@@ -39,4 +40,8 @@
 
 .hover-pointer:hover {
   cursor: pointer;
+}
+
+h1 {
+  padding: 0 var(--spacing-3) var(--spacing-3) var(--spacing-3);
 }
