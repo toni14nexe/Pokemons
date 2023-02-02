@@ -29,25 +29,27 @@ const emits = defineEmits<{
 }>();
 
 async function signUp(){
-	errorResponse.value = checkSignInData(user.value, confirmPassword.value)
-	await checkIfUserAlreadyExist()
-	if(!errorResponse.value.email && !errorResponse.value.username && !errorResponse.value.password){
-		try {
-			const response = await usersStore.signUp(user.value);
-		} catch (error) {
-			throw error;
+	if(user.value.email.length>0 && user.value.username.length>0 && user.value.password.length>0 && confirmPassword.value.length>0){
+		errorResponse.value = checkSignInData(user.value, confirmPassword.value)
+		await checkIfUserAlreadyExist()
+		if(!errorResponse.value.email && !errorResponse.value.username && !errorResponse.value.password){
+			try {
+				const response = await usersStore.signUp(user.value);
+			} catch (error) {
+				throw error;
+			}
+			ElNotification({
+				message: 'Successfully register',
+				type: 'success',
+				offset: 80,
+				showClose: flase
+			})
 		}
-		ElNotification({
-			message: 'Successfully register',
-			type: 'success',
-			offset: 80,
-			showClose: flase
-		})
+		user.value.email = ''
+		user.value.username = ''
+		user.value.password = ''
+		confirmPassword.value = ''
 	}
-	user.value.email = ''
-	user.value.username = ''
-	user.value.password = ''
-	confirmPassword.value = ''
 }
 
 async function checkIfUserAlreadyExist(){
@@ -67,7 +69,7 @@ async function checkIfUserAlreadyExist(){
 </script>
 
 <template>
-	<el-container>
+	<el-container @keyup.enter="signUp">
         <el-col align="center">
 			<h1>SignUp</h1>
 			<span>E-mail<br><span class="warning-text">{{ errorResponse.email }}</span></span>
