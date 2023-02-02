@@ -17,7 +17,8 @@ function switchTo(componentForSwitch){
     <el-container>
         <el-row>
         <el-col align="center">
-            <img style="max-width: 50vh" 
+            <img
+                class="pokemon-text"
                 src="@/assets/images/pokemon-text.png" 
                 @click="switchTo('login')"
             />
@@ -31,4 +32,13 @@ function switchTo(componentForSwitch){
 </template>
 
 <style scoped>
+.pokemon-text{
+    max-width: 50vh;
+}
+
+@media screen and (max-width: 430px) {
+    .pokemon-text{
+        width: 33vh;
+    }
+}
 </style>
