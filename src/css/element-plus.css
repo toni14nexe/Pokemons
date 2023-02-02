@@ -1,3 +1,7 @@
 .el-input {
     padding: var(--spacing-3) var(--spacing-3) var(--spacing-3) var(--spacing-3);
 }
+
+.el-button {
+    padding: var(--spacing-3) var(--spacing-3) var(--spacing-3) var(--spacing-3);
+}

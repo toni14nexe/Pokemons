@@ -29,6 +29,10 @@
   }
 } */
 
+h1 {
+  padding: 0 var(--spacing-3) var(--spacing-3) var(--spacing-3);
+}
+
 .bg-opacity {
   background-color: rgb(0, 0, 0, 0.5);
   height: 92vh;
@@ -42,6 +46,20 @@
   cursor: pointer;
 }
 
-h1 {
-  padding: 0 var(--spacing-3) var(--spacing-3) var(--spacing-3);
+.wide-btn {
+  margin: var(--spacing-8) var(--spacing-3) var(--spacing-3) var(--spacing-3);
+  width: calc(100% - (2 * var(--spacing-3)));
+}
+
+.link-color {
+  color: var(--primary-color);
+}
+
+.link-color:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.warning-text {
+  color: var(--primary-color);
 }
