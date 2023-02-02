@@ -9,10 +9,10 @@ emits('componentChange', 'PageNotFound')
 
 <template>
 	<el-container>
-        <el-col align="center">
-            <h1>Page not found</h1>
-        </el-col>
-    </el-container>
+    <el-col align="center">
+      <h2>Page not found</h2>
+    </el-col>
+  </el-container>
 </template>
 
 <style scoped>

@@ -96,7 +96,7 @@ body {
   border: solid 1px white;
   border-radius: 1rem;
   background: rgb(0, 0, 0, 0.5);
-  width: fit-content;
+  width: min-content;
   min-width: 60vh;
   padding: var(--spacing-5) 0 var(--spacing-5) 0;
 }
