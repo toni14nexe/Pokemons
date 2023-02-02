@@ -27,7 +27,7 @@ export const useUsersStore = defineStore("users", {
 				}
 			});
 			if(userOK){
-				$cookies.set('keyName', 'aaa', 60 * 30)
+				$cookies.set('user', {role: 'user', username: userData.username}, 60 * 30)
 			}
 			return userOK
 		} catch (error) {
