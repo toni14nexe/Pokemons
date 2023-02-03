@@ -11,7 +11,8 @@ let user = ref<any>({
 	email: '',
 	username: '',
 	password: '',
-	pokedex: []
+	pokedex: [],
+	role: 'user'
 })
 let errorResponse = ref<any>({
 	email: null,
@@ -42,14 +43,17 @@ async function signUp(){
 			ElNotification({
 				message: 'Successfully register',
 				type: 'success',
-				offset: 80,
-				showClose: flase
+				offset: 60,
+				showClose: false
 			})
 		}
 		user.value.email = ''
 		user.value.username = ''
 		user.value.password = ''
 		confirmPassword.value = ''
+		setTimeout(async () => {
+			switchTo('login')
+		}, 250);
 	}
 }
 
