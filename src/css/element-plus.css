@@ -5,3 +5,7 @@
 .el-button {
     padding: var(--spacing-3) var(--spacing-3) var(--spacing-3) var(--spacing-3);
 }
+
+.el-skeleton {
+    min-width: 60vh;
+}

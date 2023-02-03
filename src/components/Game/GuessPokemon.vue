@@ -1,16 +1,101 @@
 <script setup lang="ts">
-import { ref } from "vue"
 // @ts-nocheck
+import { ref } from "vue"
+import { usePokemonStore } from "../../stores/pokemons";
+import { CircleCheck, CircleClose } from '@element-plus/icons-vue'
 
+const pokemonStore = usePokemonStore();
+let loading = ref<boolean>(true)
+let correct = ref<boolean>(false)
+let wrong = ref<boolean>(false)
+let pokemon = ref<any>()
+let pokemonName = ref<string>('')
+
+async function getRandomPokemon() {
+    try {
+        pokemon.value = await pokemonStore.getOnePokemon(Math.floor(Math.random() * 151) + 1)
+
+        /* Delete this console log */
+        console.log(pokemon.value)
+
+        loading.value = false
+    } catch (error) {
+        throw error;
+    }
+}
+
+getRandomPokemon()
+
+function submit(){
+    pokemonName.value = pokemonName.value.toLowerCase()
+    if(pokemonName.value == pokemon.value.name){
+        correct.value = true
+        setTimeout(async () => {
+            correct.value = false
+        }, 2000);
+    } else{
+        wrong.value = true
+        setTimeout(async () => {
+            wrong.value = false
+        }, 2000);
+    }
+    pokemonName.value = ''
+    getRandomPokemon()
+}
 </script>
 
 <template>
     <el-container>
-        <el-col align="center">
+        <el-col v-if="loading" align="center">
+            <el-skeleton :rows="6" animated />
+        </el-col>
+        <el-col @keyup.enter="submit" v-else align="center">
             <h1>Guess Pokemon</h1>
+            <img v-if="!correct && !wrong" :src="pokemon.image">
+            <div v-if="correct">
+                <el-icon class="icon-size" color="var(--success-color)"><CircleCheck class="icon-size"/></el-icon>
+                <span style="color: var(--success-color)"><br>Correct!<br></span>
+            </div>
+            <div v-if="wrong">
+                <el-icon class="icon-size" color="var(--danger-color)"><CircleClose class="icon-size"/></el-icon>
+                <span style="color: var(--danger-color)"><br>Wrong!<br></span>
+            </div>
+            <span></span>
+            <el-input
+                v-if="!correct && !wrong"
+                v-model="pokemonName"
+                autosize
+                type="text"
+                placeholder="Pokemon name"
+                maxlength="50"
+                minlength="1"
+                autofocus
+                input-style="text-align: center"
+            />
+            <el-row justify="space-evenly" v-if="!correct && !wrong">
+                <el-button 
+                    type="danger"
+                    @click="getRandomPokemon"
+                >Skip
+                </el-button>
+                <el-button 
+                    type="success"
+                    @click="submit"
+                    :disabled="!pokemonName.length"
+                >Submit
+                </el-button>
+            </el-row>
         </el-col>
     </el-container>
 </template>
 
 <style scoped>
+img{
+    width: 40vh;
+}
+
+.icon-size{
+    width: 40vh;
+    height: 40vh;
+}
 </style>
