@@ -33,7 +33,7 @@ async function login(){
                 const response = await usersStore.login(user.value)
                 if(response){
                     wrongUsernameOrPassword.value = ''
-                    switchTo('home')
+                    switchTo('game')
                 } else{
                     wrongUsernameOrPassword.value = 'Wrong username or password!'
                 }

@@ -86,26 +86,3 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: white;
 }
-
-.main {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-}
-
-.router {
-  border: solid 1px white;
-  border-radius: 1rem;
-  background: rgb(0, 0, 0, 0.5);
-  width: min-content;
-  min-width: 60vh;
-  padding: var(--spacing-5) 0 var(--spacing-5) 0;
-}
-
-@media screen and (max-width: 549px) {
-  .router {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-  }
-}

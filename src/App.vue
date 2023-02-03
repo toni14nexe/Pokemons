@@ -14,10 +14,13 @@ function switchComponent(result){
 
 <template>
 	<Header class="header" @componentChange="(result) => switchComponent(result)" />
-	<el-main class="bg-opacity main">
+	<el-main class="main" :class="{ bg_opacity: component != 'game', 
+		main_game: component == 'game/search' || component == 'game/pokedex' ||
+            component == 'game/play' || component == 'game' }">
 		<RouterView 
-			:class="{ router: component != '' && component != 'home' }"
+			:class="{ router_small: component == 'login' || component == 'signup'}"
 			@componentChange="(result) => switchComponent(result)"
+			:component="component"
 		/>
 	</el-main>
 </template>

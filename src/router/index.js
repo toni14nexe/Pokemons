@@ -25,6 +25,26 @@ const router = createRouter({
 			component: () => import("../views/SignUp.vue")
 		},
 		{
+			path: "/game",
+			name: "game",
+			component: () => import("../views/GameHome.vue"),
+		},
+		{
+			path: "/game/play",
+			name: "play",
+			component: () => import("../views/GameHome.vue")
+		},
+		{
+			path: "/game/pokedex",
+			name: "pokedex",
+			component: () => import("../views/GameHome.vue")
+		},
+		{
+			path: "/game/search",
+			name: "search",
+			component: () => import("../views/GameHome.vue")
+		},
+		{
 			path: "/:catchAll(.*)",
 			name: "NotFound",
 			component: () => import("../views/PageNotFound.vue"),
