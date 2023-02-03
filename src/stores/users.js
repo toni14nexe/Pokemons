@@ -1,11 +1,14 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import router from "../router/index"
 
 let serverHost = 'http://localhost:3000/users/'
 
 export const useUsersStore = defineStore("users", {
   state: () => {
-    return {};
+    return {
+		pokedex: []
+	};
   },
   actions: {
 	async getUsers() {
@@ -19,15 +22,20 @@ export const useUsersStore = defineStore("users", {
 	async login(userData) {
 		try {
 			let userOK = false
+			let role
+			let id
 			let response = await axios.get(serverHost)
 			response.data.forEach(user => {
 				if(user.username === userData.username && user.password === userData.password){
 					userOK = true
+					role = user.role
+					id = user.id
 					stop
 				}
 			});
 			if(userOK){
-				$cookies.set('user', {role: 'user', username: userData.username}, 60 * 30)
+				$cookies.remove('user')
+				$cookies.set('user', { role: role, username: userData.username, id: id }, 60 * 30)
 			}
 			return userOK
 		} catch (error) {
@@ -74,5 +82,21 @@ export const useUsersStore = defineStore("users", {
 			throw error
 		}
 	},
+	async refreshUserData(){
+		let userCookie = $cookies.get('user')
+		if(userCookie && userCookie.id ){
+			try {
+				let response = await axios.get(`${serverHost}/${userCookie.id}`)
+				this.pokedex = response.data.pokedex
+				$cookies.remove('user')
+				$cookies.set('user', { role: response.data.role, username: response.data.username, id: userCookie.id }, 60 * 40)
+				return true
+			} catch (error) {
+				throw error
+			}
+		} else{
+			router.push({ path: '../login' })
+		}
+	}
   }
 });
