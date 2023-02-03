@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // @ts-nocheck
-import { ref } from "vue"
+import { ref, watch } from "vue"
 import { usePokemonStore } from "../../stores/pokemons";
 import { CircleCheck, CircleClose } from '@element-plus/icons-vue'
 
@@ -9,6 +9,7 @@ let loading = ref<boolean>(true)
 let correct = ref<boolean>(false)
 let wrong = ref<boolean>(false)
 let pokemon = ref<any>()
+let pokemonIds = ref<number[]>([])
 let pokemonName = ref<string>('')
 
 const props = defineProps<{
@@ -19,10 +20,22 @@ const emits = defineEmits<{
   (event: "pokedex", value: any): any;
 }>();
 
+watch(() => props.pokedex, () => {
+  getPokemonIds()
+});
+
+function getPokemonIds(){
+    props.pokedex.forEach(pokemon => {
+        pokemonIds.value.push(pokemon.id)
+    });
+    getRandomPokemon()
+}
+
 async function getRandomPokemon() {
     loading.value = true
+    let randomNum = getRandomId()
     try {
-        pokemon.value = await pokemonStore.getOnePokemon(Math.floor(Math.random() * 151) + 1)
+        pokemon.value = await pokemonStore.getOnePokemon(randomNum)
 
         /* Delete this console log */
         console.log(pokemon.value)
@@ -33,12 +46,20 @@ async function getRandomPokemon() {
     }
 }
 
-getRandomPokemon()
+function getRandomId(){
+    let num = Math.floor(Math.random() * 151) + 1
+    if(pokemonIds.value.includes(num)){
+        getRandomId()
+    } else{
+        return num
+    }
+}
 
 function submit(){
     pokemonName.value = pokemonName.value.toLowerCase()
     if(pokemonName.value == pokemon.value.name){
         correct.value = true
+        pokemonIds.value.push(pokemon.value.id)
         emits('pokedex', pokemon.value)
         setTimeout(async () => {
             correct.value = false
