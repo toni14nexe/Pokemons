@@ -10,7 +10,8 @@ const usersStore = useUsersStore();
 let user = ref<any>({
 	email: '',
 	username: '',
-	password: ''
+	password: '',
+	pokedex: []
 })
 let errorResponse = ref<any>({
 	email: null,
