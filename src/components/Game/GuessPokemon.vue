@@ -11,7 +11,16 @@ let wrong = ref<boolean>(false)
 let pokemon = ref<any>()
 let pokemonName = ref<string>('')
 
+const props = defineProps<{
+    pokedex: any
+}>();
+
+const emits = defineEmits<{
+  (event: "pokedex", value: any): any;
+}>();
+
 async function getRandomPokemon() {
+    loading.value = true
     try {
         pokemon.value = await pokemonStore.getOnePokemon(Math.floor(Math.random() * 151) + 1)
 
@@ -30,6 +39,7 @@ function submit(){
     pokemonName.value = pokemonName.value.toLowerCase()
     if(pokemonName.value == pokemon.value.name){
         correct.value = true
+        emits('pokedex', pokemon.value)
         setTimeout(async () => {
             correct.value = false
         }, 2000);

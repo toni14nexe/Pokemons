@@ -19,6 +19,14 @@ export const useUsersStore = defineStore("users", {
 			throw error
 		}
 	},
+	async getUser(id) {
+		try {
+			let response = await axios.get(`${serverHost}${id}`)
+			return response
+		} catch (error) {
+			throw error
+		}
+	},
 	async login(userData) {
 		try {
 			let userOK = false
@@ -96,6 +104,25 @@ export const useUsersStore = defineStore("users", {
 			}
 		} else{
 			router.push({ path: '../login' })
+		}
+	},
+	async addPokemon(pokemon){
+		let userCookie = $cookies.get('user')
+		let sendData
+		if(userCookie && userCookie.id){
+			try {
+				let response = await this.getUser(userCookie.id)
+				response.data.pokedex.push(pokemon)
+				try {
+					await axios.put(`${serverHost}${userCookie.id}`, response.data)
+					this.refreshUserData()
+					return true
+				} catch (error) {
+					throw error
+				}
+			} catch (error) {
+				throw error;
+			}
 		}
 	}
   }

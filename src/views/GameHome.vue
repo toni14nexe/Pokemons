@@ -9,7 +9,6 @@ import { storeToRefs } from 'pinia'
 
 const usersStore = useUsersStore();
 let pokedex = ref<any>([])
-let pokedexIds = ref<number[]>([])
 const props = defineProps<{
     component: string
 }>();
@@ -18,8 +17,6 @@ async function refreshUserData(){
     try {
         await usersStore.refreshUserData()
         pokedex.value = usersStore.pokedex
-        getPokedexIds()
-        //console.log(pokedex.value)
     } catch (error) {
         throw error;
     }
@@ -27,10 +24,14 @@ async function refreshUserData(){
 
 refreshUserData()
 
-function getPokedexIds(){
-    pokedex.value.forEach(pokemon => {
-        pokedexIds.value.push(pokemon.id)
-    });
+async function addPokemon(pokemon) {
+    pokedex.value.push(pokemon)
+    try {
+        await usersStore.addPokemon(pokemon)
+        refreshUserData()
+    } catch (error) {
+        throw error;
+    }
 }
 
 </script>
@@ -40,7 +41,7 @@ function getPokedexIds(){
         <el-col align="center">
             <Search v-if="component == 'game/search'" />
             <Pokedex v-else-if="component == 'game/pokedex'" />
-            <GuessPokemon v-else :pokedexIds="pokedexIds" />
+            <GuessPokemon v-else :pokedex="pokedex" @pokedex="(result) => addPokemon(result)" />
         </el-col>
     </el-container>
 </template>
