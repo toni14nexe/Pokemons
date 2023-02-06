@@ -8,6 +8,7 @@ const pokemonsStore = usePokemonStore();
 let pokemonIds = ref<number[]>([])
 let tablePokemons = ref<any[]>([])
 let isLoading = ref<boolean>(true)
+let title = ref<string>('')
 
 const props = defineProps<{
     pokedex: any,
@@ -45,14 +46,17 @@ function getPokemonIds(){
 function changeTablePokemons(){
     tablePokemons.value = []
     if(props.component == 'game/pokedex/my-pokemons'){
+        title.value = 'My Pokemons'
         tablePokemons.value = props.pokedex
     } else if(props.component == 'game/pokedex/free-pokemons'){
+        title.value = 'Free Pokemons'
         pokemonsStore.pokemons.forEach(pokemon => {
             if(!pokemonIds.value.includes(pokemon.id)){
                 tablePokemons.value.push(pokemon)
             }
         });
     } else{
+        title.value = 'All Pokemons'
         tablePokemons.value = pokemonsStore.pokemons
     }
 }
@@ -63,19 +67,23 @@ function changeTablePokemons(){
         <el-row v-if="!tablePokemons.length || !pokemonsStore.pokemons.length || isLoading">
             <el-skeleton :rows="6" animated />
         </el-row>
-        <el-row v-else class="pl-2" :class="{'pr-2': tablePokemons.length < 10}" :gutter="5" >
-            <el-col class="pb-1" v-bind:key="pokemon.id" v-for="pokemon in tablePokemons" :span="8">
-                <el-card :body-style="{ padding: 0 }" class="pb-3">
-                    <el-skeleton class="pokedex-image mt-5">
-                        <template #template>
-                            <img v-if="pokemonIds.includes(pokemon.id)" :src="pokemon.image" class="pokedex-image" />
-                            <el-skeleton-item v-else variant="image" class="pokedex-image" />
-                        </template>
-                    </el-skeleton>
-                    <span>{{ pokemon.name[0].toUpperCase() + pokemon.name.slice(1) }}</span>
-                </el-card>
-            </el-col>
-        </el-row>
+        <div v-else>
+            <h1 class="mb-1">{{ title }}</h1>
+            <el-row class="pl-2" :class="{'pr-2': tablePokemons.length < 10}" :gutter="5" >
+                <el-col class="pb-1" v-bind:key="pokemon.id" v-for="pokemon in tablePokemons" :span="8">
+                    <el-card :body-style="{ padding: 0 }" class="pb-3">
+                        <el-skeleton class="pokedex-image mt-5">
+                            <template #template>
+                                <img v-if="pokemonIds.includes(pokemon.id)" :src="pokemon.image" class="pokedex-image" />
+                                <el-skeleton-item v-else variant="image" class="pokedex-image" />
+                            </template>
+                        </el-skeleton>
+                        <span>{{ pokemon.name[0].toUpperCase() + pokemon.name.slice(1) }}</span>
+                    </el-card>
+                </el-col>
+            </el-row>
+        </div>
+        
     </el-container>
 </template>
 
