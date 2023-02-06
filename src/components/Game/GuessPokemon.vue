@@ -3,6 +3,7 @@
 import { ref, watch } from "vue"
 import { usePokemonStore } from "../../stores/pokemons";
 import { CircleCheck, CircleClose } from '@element-plus/icons-vue'
+import { getUserPokemonsIds } from "../../composables/getPokemonsIds";
 
 const pokemonStore = usePokemonStore();
 let loading = ref<boolean>(true)
@@ -25,9 +26,7 @@ watch(() => props.pokedex, () => {
 });
 
 function getPokemonIds(){
-    props.pokedex.forEach(pokemon => {
-        pokemonIds.value.push(pokemon.id)
-    });
+    pokemonIds.value = getUserPokemonsIds(props.pokedex)
     getRandomPokemon()
 }
 
