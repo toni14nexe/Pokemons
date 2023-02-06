@@ -1,12 +1,30 @@
 <script setup lang="ts">
+// @ts-nocheck 
 import router from "../router/index"
 import { ref } from "vue"
-// @ts-nocheck 
+import { Search } from '@element-plus/icons-vue'
+import { ElNotification } from 'element-plus'
+
 let component = ref('home')
+let search = ref<string>('')
 
 function switchTo(componentForSwitch){
-	router.push({ path: `/${componentForSwitch}/` })
-	emits('componentChange', componentForSwitch)
+	if(componentForSwitch == 'game/search'){
+		if(!search.value.length){
+			ElNotification({
+				message: 'Search input field is empty!',
+				type: 'info',
+				offset: 60,
+				showClose: false
+			})
+		} else{
+			router.push({ path: `/${componentForSwitch}/`, query: { pokemon: search.value } })
+			emits('componentChange', componentForSwitch)
+		}
+	} else{
+		router.push({ path: `/${componentForSwitch}/` })
+		emits('componentChange', componentForSwitch)
+	}
 }
 
 const emits = defineEmits<{
@@ -33,7 +51,17 @@ const emits = defineEmits<{
 		<el-space style="color: black" spacer="|" class="pr-3">
 			<el-menu-item index="registration" @click="switchTo('signup')">SignUp</el-menu-item>
 			<el-menu-item index="login" @click="switchTo('login')">Login</el-menu-item>
-			<el-menu-item index="search" @click="switchTo('game/search')">Search</el-menu-item>
+			<el-input 
+				placeholder="Search Pokemon"
+				v-model="search"
+				@keyup.enter="switchTo('game/search')"
+			>
+				<template #suffix>
+					<el-icon @click="switchTo('game/search')">
+						<Search />
+					</el-icon>
+				</template>
+			</el-input>
 			<el-menu-item index="play" @click="switchTo('game')">Play</el-menu-item>
 			<el-sub-menu index="pokedex-all" class="hover-pointer-off">
 				<template #title>Pokedex</template>
