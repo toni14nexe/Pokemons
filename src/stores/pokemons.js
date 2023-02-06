@@ -8,21 +8,29 @@ export const usePokemonStore = defineStore("pokemons", {
     return {};
   },
   actions: {
-	async getOnePokemon(id) {
-		try {
-			let response = await axios.get(`${serverHost}/pokemon/${id}`)
-      if(response.data){
-      response.data.name = response.data.name.replace('-', " ");
-      let pokemon = {
-        id: response.data.id,
-        name: response.data.name,
-        image: response.data.sprites.front_default
+    async getOnePokemon(id) {
+      try {
+        let response = await axios.get(`${serverHost}/pokemon/${id}`)
+        if(response.data){
+          response.data.name = response.data.name.replace('-', " ");
+        let pokemon = {
+          id: response.data.id,
+          name: response.data.name,
+          image: response.data.sprites.front_default
+        }
+        return pokemon
       }
-			return pokemon
+      } catch (error) {
+        this.getOnePokemon(Math.floor(Math.random() * 151) + 1)
+      }
+    },
+    async getFirst151Pokemons(){
+      try {
+        let response = await axios.get(`${serverHost}/pokemon?limit=151`)
+        return response.data.results
+      } catch (error) {
+        return error
+      }
     }
-		} catch (error) {
-			this.getOnePokemon(Math.floor(Math.random() * 151) + 1)
-		}
-	}
   }
 });
