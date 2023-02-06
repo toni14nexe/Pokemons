@@ -5,7 +5,9 @@ let serverHost = 'https://pokeapi.co/api/v2'
 
 export const usePokemonStore = defineStore("pokemons", {
   state: () => {
-    return {};
+    return {
+      pokemons: []
+    };
   },
   actions: {
     async getOnePokemon(id) {
@@ -18,6 +20,9 @@ export const usePokemonStore = defineStore("pokemons", {
           name: response.data.name,
           image: response.data.sprites.front_default
         }
+        if(!pokemon.image){
+          pokemon.image = response.data.sprites.front_shiny
+        }
         return pokemon
       }
       } catch (error) {
@@ -25,11 +30,20 @@ export const usePokemonStore = defineStore("pokemons", {
       }
     },
     async getFirst151Pokemons(){
-      try {
-        let response = await axios.get(`${serverHost}/pokemon?limit=151`)
-        return response.data.results
-      } catch (error) {
-        return error
+      this.pokemons = []
+      for(let id=1; id<=151; id++){
+        try {
+          let response = await axios.get(`${serverHost}/pokemon/${id}`)
+          let pokemon = {
+            id: response.data.id,
+            name: response.data.name,
+            image: response.data.sprites.front_default
+          }
+          if(!pokemon.image){
+            pokemon.image = response.data.sprites.front_shiny
+          }
+          this.pokemons.push(pokemon)
+        } catch (error) {}
       }
     }
   }
