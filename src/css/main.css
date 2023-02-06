@@ -101,8 +101,9 @@ h1 {
 }
 
 .router_small::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color);
+  opacity: 0.5;
   border-radius: var(--spacing-1);
+  border: 1.5px solid white;
 }
 
 @media screen and (max-width: 549px) {
