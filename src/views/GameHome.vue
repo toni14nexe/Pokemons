@@ -45,8 +45,8 @@ async function addPokemon(pokemon) {
     <el-container>
         <el-col align="center">
             <Search v-if="component == 'game/search'" />
-            <Pokedex v-else-if="component == 'game/pokedex'" :pokedex="pokedex" />
-            <GuessPokemon v-else :pokedex="pokedex" @pokedex="(result) => addPokemon(result)" />
+            <GuessPokemon v-else-if="component == 'game'" :pokedex="pokedex" @pokedex="(result) => addPokemon(result)" />
+            <Pokedex v-else :pokedex="pokedex" :component="component" />
         </el-col>
     </el-container>
 </template>

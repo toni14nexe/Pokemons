@@ -35,7 +35,12 @@ const emits = defineEmits<{
 			<el-menu-item index="login" @click="switchTo('login')">Login</el-menu-item>
 			<el-menu-item index="search" @click="switchTo('game/search')">Search</el-menu-item>
 			<el-menu-item index="play" @click="switchTo('game')">Play</el-menu-item>
-			<el-menu-item index="pokedex" @click="switchTo('game/pokedex')">Pokedex</el-menu-item>
+			<el-sub-menu index="pokedex-all" class="hover-pointer-off">
+				<template #title>Pokedex</template>
+				<el-menu-item index="pokedex-all" @click="switchTo('game/pokedex/all-pokemons')">All Pokemons</el-menu-item>
+				<el-menu-item index="pokedex-my" @click="switchTo('game/pokedex/my-pokemons')">My Pokemons</el-menu-item>
+				<el-menu-item index="pokedex-free" @click="switchTo('game/pokedex/free-pokemons')">Free Pokemons</el-menu-item>
+			</el-sub-menu>
 		</el-space>
 	</el-menu>
 </template>

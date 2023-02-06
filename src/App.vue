@@ -16,12 +16,7 @@ function switchComponent(result){
 	<Header class="header" @componentChange="(result) => switchComponent(result)" />
 	<el-main class="main bg-opacity">
 		<RouterView 
-			:class="{ router_small: component == 'login' 
-				|| component == 'signup' 
-				|| component == 'game' 
-				|| component == 'game/search'
-				|| component == 'game/pokedex'
-			}"
+			:class="{ router_small: component != 'home' && component != ''}"
 			@componentChange="(result) => switchComponent(result)"
 			:component="component"
 		/>

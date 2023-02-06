@@ -15,7 +15,7 @@ const router = createRouter({
 			component: Home
 		},
 		{
-			path: "/Login",
+			path: "/login",
 			name: "login",
 			component: () => import("../views/Login.vue")
 		},
@@ -32,6 +32,24 @@ const router = createRouter({
 		{
 			path: "/game/pokedex",
 			name: "pokedex",
+			component: () => import("../views/GameHome.vue")
+		},
+		,
+		{
+			path: "/game/pokedex/all-pokemons",
+			name: "pokedexAll",
+			component: () => import("../views/GameHome.vue")
+		},
+		,
+		{
+			path: "/game/pokedex/my-pokemons",
+			name: "pokedexMy",
+			component: () => import("../views/GameHome.vue")
+		},
+		,
+		{
+			path: "/game/pokedex/free-pokemons",
+			name: "pokedexFree",
 			component: () => import("../views/GameHome.vue")
 		},
 		{
