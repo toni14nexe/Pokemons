@@ -1,17 +1,24 @@
 <script setup lang="ts">
 // @ts-nocheck
-import { ref } from "vue"
+import { ref, onMounted } from "vue"
 import GuessPokemon from "../components/Game/GuessPokemon.vue"
 import Pokedex from "../components/Game/Pokedex.vue"
 import Search from "../components/Game/Search.vue"
+import { usePokemonStore } from "../stores/pokemons";
 import { useUsersStore } from "../stores/users";
 import { storeToRefs } from 'pinia'
 
+const pokemonStore = usePokemonStore();
 const usersStore = useUsersStore();
 let pokedex = ref<any>([])
 const props = defineProps<{
     component: string
 }>();
+
+onMounted(() => {
+    pokemonStore.getFirst151Pokemons()
+    refreshUserData()
+})
 
 async function refreshUserData(){
     try {
@@ -21,8 +28,6 @@ async function refreshUserData(){
         throw error;
     }
 }
-
-refreshUserData()
 
 async function addPokemon(pokemon) {
     pokedex.value.push(pokemon)
@@ -40,7 +45,7 @@ async function addPokemon(pokemon) {
     <el-container>
         <el-col align="center">
             <Search v-if="component == 'game/search'" />
-            <Pokedex v-else-if="component == 'game/pokedex'" />
+            <Pokedex v-else-if="component == 'game/pokedex'" :pokedex="pokedex" />
             <GuessPokemon v-else :pokedex="pokedex" @pokedex="(result) => addPokemon(result)" />
         </el-col>
     </el-container>
