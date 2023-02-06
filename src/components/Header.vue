@@ -18,7 +18,7 @@ function switchTo(componentForSwitch){
 				showClose: false
 			})
 		} else{
-			router.push({ path: `/${componentForSwitch}/`, query: { pokemon: search.value } })
+			router.push({ path: `/${componentForSwitch}/`, query: { 'pokemon': search.value } })
 			emits('componentChange', componentForSwitch)
 		}
 	} else{

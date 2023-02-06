@@ -83,20 +83,8 @@ function changeTablePokemons(){
                 </el-col>
             </el-row>
         </div>
-        
     </el-container>
 </template>
 
 <style scoped>
-    .pokedex-image{
-        min-width: 120px;
-        min-height: 120px;
-        width: 120px; 
-        height: 120px;
-    }
-
-    .active{
-        background: var(--primary-color);
-        color: black;
-    }
 </style>
