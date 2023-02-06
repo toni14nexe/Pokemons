@@ -31,9 +31,11 @@ function getPokemonIds(){
     getRandomPokemon()
 }
 
+getPokemonIds()
+
 async function getRandomPokemon() {
     loading.value = true
-    let randomNum = getRandomId()
+    let randomNum = await getRandomId()
     try {
         pokemon.value = await pokemonStore.getOnePokemon(randomNum)
 
