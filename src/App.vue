@@ -14,8 +14,7 @@ function switchComponent(result){
 
 <template>
 	<Header class="header" @componentChange="(result) => switchComponent(result)" />
-	<el-main class="main" :class="{ bg_opacity: component != 'game', 
-		 }">
+	<el-main class="main bg-opacity">
 		<RouterView 
 			:class="{ router_small: component == 'login' 
 				|| component == 'signup' 
