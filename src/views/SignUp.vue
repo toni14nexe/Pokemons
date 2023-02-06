@@ -37,6 +37,10 @@ async function signUp(){
 		if(!errorResponse.value.email && !errorResponse.value.username && !errorResponse.value.password){
 			try {
 				const response = await usersStore.signUp(user.value);
+				clearVariables()
+				setTimeout(async () => {
+					switchTo('login')
+				}, 250);
 			} catch (error) {
 				throw error;
 			}
@@ -47,14 +51,15 @@ async function signUp(){
 				showClose: false
 			})
 		}
-		user.value.email = ''
-		user.value.username = ''
-		user.value.password = ''
-		confirmPassword.value = ''
-		setTimeout(async () => {
-			switchTo('login')
-		}, 250);
+		clearVariables()
 	}
+}
+
+function clearVariables(){
+	user.value.email = ''
+	user.value.username = ''
+	user.value.password = ''
+	confirmPassword.value = ''
 }
 
 async function checkIfUserAlreadyExist(){
