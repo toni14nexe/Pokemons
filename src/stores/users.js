@@ -103,7 +103,7 @@ export const useUsersStore = defineStore("users", {
 				throw error
 			}
 		} else{
-			router.push({ path: '../login' })
+			router.push({ path: '/login' })
 		}
 	},
 	async addPokemon(pokemon){
@@ -123,6 +123,14 @@ export const useUsersStore = defineStore("users", {
 			} catch (error) {
 				throw error;
 			}
+		}
+	},
+	checkIfUserIsLoggedIn(){
+		let userCookie = $cookies.get('user')
+		if(userCookie && userCookie.id){
+			return { role: userCookie.role, username: userCookie.username }
+		} else{
+			return { role: '', username: '' }
 		}
 	}
   }

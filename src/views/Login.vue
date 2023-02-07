@@ -23,6 +23,7 @@ function switchTo(componentForSwitch){
 
 const emits = defineEmits<{
   (event: "componentChange", value: string): string;
+  (event: "loggedIn"): void;
 }>();
 
 async function login(){
@@ -33,6 +34,7 @@ async function login(){
                 const response = await usersStore.login(user.value)
                 if(response){
                     wrongUsernameOrPassword.value = ''
+	                emits('loggedIn')
                     switchTo('game')
                 } else{
                     wrongUsernameOrPassword.value = 'Wrong username or password!'
