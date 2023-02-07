@@ -68,7 +68,6 @@ function changeTablePokemons(){
             <el-skeleton :rows="6" animated />
         </el-row>
         <div v-else>
-            {{ props.component }}
             <h1 class="mb-1">{{ title }}</h1>
             <el-row class="pl-2" :class="{'pr-2': tablePokemons.length < 10}" :gutter="5" >
                 <el-col class="pb-1" v-bind:key="pokemon.id" v-for="pokemon in tablePokemons" :span="8">

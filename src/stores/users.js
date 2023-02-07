@@ -104,7 +104,10 @@ export const useUsersStore = defineStore("users", {
 				throw error
 			}
 		} else{
-			router.push({ path: '/login' })
+			let path = router.currentRoute.value.fullPath
+			if(!path.includes('signup') && !path.includes('home') && !path.includes('login')){
+				router.push({ path: '/home' })
+			}
 		}
 	},
 	async addPokemon(pokemon){

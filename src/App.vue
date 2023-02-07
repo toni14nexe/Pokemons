@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // @ts-nocheck
-import { ref, watch } from "vue"
+import { onMounted, ref, watch } from "vue"
 import { RouterLink, RouterView } from "vue-router"
 import Header from "./components/Header.vue"
 import router from "./router/index"
@@ -11,9 +11,14 @@ let component = ref(router.currentRoute.value.href)
 let loggedIn = ref<number>(0)
 let firstMusic = ref<boolean>(false)
 
-watch(() => router.currentRoute.value.href, () => {
+watch(() => router.currentRoute.value.path, () => {
+	component.value = router.currentRoute.value.path
     usersStore.refreshUserData()
 });
+
+onMounted(()=>{
+	component.value = router.currentRoute.value.path
+})
 
 async function refreshUserData(){
     try {
@@ -37,8 +42,8 @@ function switchComponent(result){
 		:firstMusic="firstMusic"
 	/>
 	<el-main class="main bg-opacity">
-		<RouterView 
-			:class="{ router_small: component != 'home' && component != ''}"
+		<RouterView
+			:class="{ router_small: component != '/' && component != 'home' && component != '/home'}"
 			@componentChange="(result) => switchComponent(result)"
 			:component="component"
 			@loggedIn="loggedIn++"

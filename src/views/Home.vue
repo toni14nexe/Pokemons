@@ -1,16 +1,26 @@
 <script setup lang="ts">
 // @ts-nocheck
 import router from "../router/index"
-import image from "@/assets/images/pokemon-text.png"
+import { useUsersStore } from "../stores/users";
+import { ref } from "vue"
+
+const usersStore = useUsersStore();
+let user = ref<any>({ role: '', username: '' })
 
 const emits = defineEmits<{
   (event: "componentChange", value: string): string;
   (event: "firstMusic"): void;
 }>();
 
-function switchTo(componentForSwitch){
-	router.push({ path: `/${componentForSwitch}/` })
-	emits('componentChange', componentForSwitch)
+async function switchTo(){
+    user.value = await usersStore.checkIfUserIsLoggedIn()
+    if(!user.value.username.length){
+        router.push({ path: '/login' })
+	    emits('componentChange', '')
+    } else{
+        router.push({ path: '/game' })
+	    emits('componentChange', '')
+    }
 }
 </script>
 
@@ -21,14 +31,14 @@ function switchTo(componentForSwitch){
                 <img
                     class="pokemon-text hover-pointer"
                     src="@/assets/images/pokemon-text.png" 
-                    @click="{ switchTo('login'); emits('firstMusic') }"
+                    @click="{ switchTo(); emits('firstMusic') }"
                 />
             </el-col>
             <el-col align="center">
                 <img
                     class="hover-pointer"
                     src="@/assets/images/logo.png" 
-                    @click="{ switchTo('login'); emits('firstMusic') }"
+                    @click="{ switchTo(); emits('firstMusic') }"
             />
             </el-col>
         </el-row>

@@ -17,6 +17,7 @@ let errorResponse = ref<any>({
 let wrongUsernameOrPassword = ref<string>('')
 
 function switchTo(componentForSwitch){
+    router.push({ path: `/${componentForSwitch}/` })
 	emits('componentChange', componentForSwitch)
 }
 
