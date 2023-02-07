@@ -124,6 +124,19 @@ function submit(){
                 >Submit
                 </el-button>
             </el-row>
+            <el-row class="mt-3" justify="space-evenly">
+                <el-col :span="23">
+                    <span>My Pokemon progress:</span>
+                    {{ ((pokemonIds.length / 151) * 100).toFixed(1) }}
+                    <el-progress
+                        class="mt-3"
+                        :text-inside="true"
+                        :stroke-width="30"
+                        :percentage="((pokemonIds.length / 151) * 100).toFixed(1)"
+                        status="success"
+                    />
+                </el-col>
+            </el-row>
         </el-col>
     </el-container>
 </template>
