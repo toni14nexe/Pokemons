@@ -97,6 +97,14 @@ export const useUsersStore = defineStore("users", {
 			try {
 				let response = await axios.get(`${serverHost}/${userCookie.id}`)
 				this.pokedex = response.data.pokedex
+				this.pokedex.sort((pokemon1, pokemon2) => {
+					if (pokemon1.name < pokemon2.name) {
+					  return -1;
+					}
+					if (pokemon1.name > pokemon2.name) {
+					  return 1;
+					}
+				  })
 				$cookies.remove('user')
 				$cookies.set('user', { role: response.data.role, username: response.data.username, id: userCookie.id }, 60 * 40)
 				return true

@@ -44,6 +44,14 @@ export const usePokemonStore = defineStore("pokemons", {
           }
           this.pokemons.push(pokemon)
         } catch (error) {}
+        this.pokemons.sort((pokemon1, pokemon2) => {
+          if (pokemon1.name < pokemon2.name) {
+            return -1;
+          }
+          if (pokemon1.name > pokemon2.name) {
+            return 1;
+          }
+        })
       }
     }
   }
