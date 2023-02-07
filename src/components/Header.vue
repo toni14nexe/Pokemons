@@ -5,18 +5,25 @@ import { ref, onMounted, watch } from "vue"
 import { Search, SwitchButton } from '@element-plus/icons-vue'
 import { ElNotification } from 'element-plus'
 import { useUsersStore } from "../stores/users";
+import Music from "./Music.vue"
 
 const usersStore = useUsersStore();
 let component = ref('home')
 let search = ref<string>('')
 let user = ref<any>({ role: '', username: '' })
+let firstMusic = ref<boolean>(false)
 
 const props = defineProps<{
-    loggedIn: number
+    loggedIn: number,
+	firstMusic: boolean
 }>();
 
 watch(() => props.loggedIn, () => {
   checkIfUserIsLoggedIn()
+});
+
+watch(() => props.firstMusic, () => {
+    firstMusic = true
 });
 
 onMounted(() =>{
@@ -59,6 +66,7 @@ function logout(){
 
 <template>
 	<el-menu
+		@click="firstMusic = true"
 		style="opacity: 0.9;"
 		class="hover-pointer"
 		:default-active="component"
@@ -73,7 +81,6 @@ function logout(){
 			</el-space>
 		</el-menu-item>
 		<div class="flex-grow" />
-		<el-space style="color: black" spacer="|" class="pr-3">
 			<el-menu-item v-if="!user.username.length" index="registration" @click="switchTo('signup')">SignUp</el-menu-item>
 			<el-menu-item v-if="!user.username.length" index="login" @click="switchTo('login')">Login</el-menu-item>
 			<el-input
@@ -96,15 +103,17 @@ function logout(){
 				<el-menu-item index="pokedex-my" @click="switchTo('game/pokedex/my-pokemons')">My Pokemons</el-menu-item>
 				<el-menu-item index="pokedex-free" @click="switchTo('game/pokedex/free-pokemons')">Free Pokemons</el-menu-item>
 			</el-sub-menu>
+			<el-menu-item> 
+				<Music :music="firstMusic" />
+			</el-menu-item>
 			<el-menu-item 
 				v-if="user.username.length" 
 				@click="logout"
 			>
-				<el-icon>
+				<el-icon size="35">
 					<SwitchButton />
 				</el-icon>
 			</el-menu-item>
-		</el-space>
 	</el-menu>
 </template>
 

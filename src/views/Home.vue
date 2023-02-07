@@ -5,6 +5,7 @@ import image from "@/assets/images/pokemon-text.png"
 
 const emits = defineEmits<{
   (event: "componentChange", value: string): string;
+  (event: "firstMusic"): void;
 }>();
 
 function switchTo(componentForSwitch){
@@ -20,14 +21,14 @@ function switchTo(componentForSwitch){
                 <img
                     class="pokemon-text hover-pointer"
                     src="@/assets/images/pokemon-text.png" 
-                    @click="switchTo('login')"
+                    @click="{ switchTo('login'); emits('firstMusic') }"
                 />
             </el-col>
             <el-col align="center">
                 <img
                     class="hover-pointer"
                     src="@/assets/images/logo.png" 
-                    @click="switchTo('login')"
+                    @click="{ switchTo('login'); emits('firstMusic') }"
             />
             </el-col>
         </el-row>

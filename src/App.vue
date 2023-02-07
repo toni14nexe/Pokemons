@@ -7,6 +7,7 @@ import router from "../router/index"
 
 let component = ref(window.location.pathname.slice(1, window.location.pathname.length - 1))
 let loggedIn = ref<number>(0)
+let firstMusic = ref<boolean>(false)
 
 function switchComponent(result){
 	component.value = result
@@ -14,13 +15,19 @@ function switchComponent(result){
 </script>
 
 <template>
-	<Header class="header" :loggedIn="loggedIn" @componentChange="(result) => switchComponent(result)" />
+	<Header 
+		class="header" 
+		:loggedIn="loggedIn" 
+		@componentChange="(result) => switchComponent(result)" 
+		:firstMusic="firstMusic"
+	/>
 	<el-main class="main bg-opacity">
 		<RouterView 
 			:class="{ router_small: component != 'home' && component != ''}"
 			@componentChange="(result) => switchComponent(result)"
 			:component="component"
 			@loggedIn="loggedIn++"
+			@firstMusic="firstMusic = true"
 		/>
 	</el-main>
 </template>
