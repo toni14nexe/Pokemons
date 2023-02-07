@@ -95,7 +95,7 @@ function logout(){
 					</el-icon>
 				</template>
 			</el-input>
-			<el-menu-item v-if="user.username.length" @click="switchTo('game/pokedex/my-pokemons')">{{ user.username }}</el-menu-item>
+			<el-menu-item v-if="user.username.length" index='me' @click="switchTo('game/pokedex/my-pokemons')">{{ user.username }}</el-menu-item>
 			<el-menu-item v-if="user.username.length" index="play" @click="switchTo('game')">Play</el-menu-item>
 			<el-sub-menu v-if="user.username.length" index="pokedex-all" class="hover-pointer-off">
 				<template #title>Pokedex</template>
@@ -103,10 +103,11 @@ function logout(){
 				<el-menu-item index="pokedex-my" @click="switchTo('game/pokedex/my-pokemons')">My Pokemons</el-menu-item>
 				<el-menu-item index="pokedex-free" @click="switchTo('game/pokedex/free-pokemons')">Free Pokemons</el-menu-item>
 			</el-sub-menu>
-			<el-menu-item> 
-				<Music :music="firstMusic" />
+			<el-menu-item>
+				<Music />
 			</el-menu-item>
-			<el-menu-item 
+			<el-menu-item
+				index="logout"
 				v-if="user.username.length" 
 				@click="logout"
 			>
