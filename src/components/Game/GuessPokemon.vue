@@ -40,16 +40,20 @@ function getPokemonIds(loading){
 async function getRandomPokemon() {
     loading.value = true
     let randomNum = await getRandomId()
-    try {
-        pokemon.value = await pokemonStore.getOnePokemon(randomNum)
+    if(randomNum > 0){
+        setTimeout(async () => {
+            try {
+                pokemon.value = await pokemonStore.getOnePokemon(randomNum)
 
-        /* Delete this console log */
-        console.log(pokemon.value)
+                /* Delete this console log */
+                console.log(pokemon.value)
 
-        loading.value = false
-    } catch (error) {
-        throw error;
-    }
+                loading.value = false
+            } catch (error) {
+                throw error;
+            }
+        }, 250)
+    } else getRandomPokemon()
 }
 
 function getRandomId(){
@@ -89,7 +93,7 @@ function submit(){
         </el-col>
         <el-col @keyup.enter="submit" v-else align="center">
             <h1>Guess Pokemon</h1>
-            <img v-if="!correct && !wrong" :src="pokemon.image">
+            <img v-if="!correct && !wrong && pokemon.image.length>0" :src="pokemon.image">
             <div v-if="correct">
                 <el-icon class="icon-size" color="var(--success-color)">
                     <CircleCheck class="icon-size"/>
