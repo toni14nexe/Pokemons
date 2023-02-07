@@ -12,6 +12,7 @@ let wrong = ref<boolean>(false)
 let pokemon = ref<any>()
 let pokemonIds = ref<number[]>([])
 let pokemonName = ref<string>('')
+let showIfWrongPokemonName = ref<string>('')
 
 const props = defineProps<{
     pokedex: any
@@ -66,6 +67,7 @@ function submit(){
             correct.value = false
         }, 2000);
     } else{
+        showIfWrongPokemonName.value = pokemon.value.name
         wrong.value = true
         setTimeout(async () => {
             wrong.value = false
@@ -85,12 +87,17 @@ function submit(){
             <h1>Guess Pokemon</h1>
             <img v-if="!correct && !wrong" :src="pokemon.image">
             <div v-if="correct">
-                <el-icon class="icon-size" color="var(--success-color)"><CircleCheck class="icon-size"/></el-icon>
+                <el-icon class="icon-size" color="var(--success-color)">
+                    <CircleCheck class="icon-size"/>
+                </el-icon>
                 <span style="color: var(--success-color)"><br>Correct!<br></span>
             </div>
             <div v-if="wrong">
-                <el-icon class="icon-size" color="var(--danger-color)"><CircleClose class="icon-size"/></el-icon>
+                <el-icon class="icon-size" color="var(--danger-color)">
+                    <CircleClose class="icon-size"/>
+                </el-icon>
                 <span style="color: var(--danger-color)"><br>Wrong!<br></span>
+                <span><br>That Pokemon was {{ showIfWrongPokemonName[0].toUpperCase() }}{{ showIfWrongPokemonName.slice(1) }}<br></span>
             </div>
             <span></span>
             <el-input
