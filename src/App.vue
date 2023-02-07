@@ -1,13 +1,28 @@
 <script setup lang="ts">
 // @ts-nocheck
-import { ref } from "@vue/reactivity"
+import { ref, watch } from "vue"
 import { RouterLink, RouterView } from "vue-router"
 import Header from "./components/Header.vue"
-import router from "../router/index"
+import router from "./router/index"
+import { useUsersStore } from "./stores/users";
 
-let component = ref(window.location.pathname.slice(1, window.location.pathname.length - 1))
+const usersStore = useUsersStore();
+let component = ref(router.currentRoute.value.href)
 let loggedIn = ref<number>(0)
 let firstMusic = ref<boolean>(false)
+
+watch(() => router.currentRoute.value.href, () => {
+    usersStore.refreshUserData()
+});
+
+async function refreshUserData(){
+    try {
+        await usersStore.refreshUserData()
+        pokedex.value = usersStore.pokedex
+    } catch (error) {
+        throw error;
+    }
+}
 
 function switchComponent(result){
 	component.value = result

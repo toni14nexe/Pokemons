@@ -91,6 +91,7 @@ export const useUsersStore = defineStore("users", {
 		}
 	},
 	async refreshUserData(){
+		this.pokedex = null
 		let userCookie = $cookies.get('user')
 		if(userCookie && userCookie.id ){
 			try {

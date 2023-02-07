@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // @ts-nocheck
-import { ref, watch } from "vue"
+import { ref, watch, onMounted } from "vue"
 import { usePokemonStore } from "../../stores/pokemons";
 import { CircleCheck, CircleClose } from '@element-plus/icons-vue'
 import { getUserPokemonsIds } from "../../composables/getPokemonsIds";
@@ -27,13 +27,15 @@ watch(() => props.pokedex, () => {
   getPokemonIds()
 });
 
-function getPokemonIds(){
+onMounted(() => {
+    getPokemonIds('firstPokemon')
+})
+
+function getPokemonIds(loading){
     pokemonIds.value = getUserPokemonsIds(props.pokedex)
     myPokemonProgress.value = parseFloat(((pokemonIds.value.length / 151) * 100).toFixed(1))
     getRandomPokemon()
 }
-
-getPokemonIds()
 
 async function getRandomPokemon() {
     loading.value = true
