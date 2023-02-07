@@ -13,6 +13,7 @@ let pokemon = ref<any>()
 let pokemonIds = ref<number[]>([])
 let pokemonName = ref<string>('')
 let showIfWrongPokemonName = ref<string>('')
+let myPokemonProgress = ref<number>(0)
 
 const props = defineProps<{
     pokedex: any
@@ -28,6 +29,7 @@ watch(() => props.pokedex, () => {
 
 function getPokemonIds(){
     pokemonIds.value = getUserPokemonsIds(props.pokedex)
+    myPokemonProgress.value = parseFloat(((pokemonIds.value.length / 151) * 100).toFixed(1))
     getRandomPokemon()
 }
 
@@ -126,13 +128,12 @@ function submit(){
             </el-row>
             <el-row class="mt-3" justify="space-evenly">
                 <el-col :span="23">
-                    <span>My Pokemon progress:</span>
-                    {{ ((pokemonIds.length / 151) * 100).toFixed(1) }}
+                    <span>My Pokemon progress</span>
                     <el-progress
                         class="mt-3"
                         :text-inside="true"
                         :stroke-width="30"
-                        :percentage="((pokemonIds.length / 151) * 100).toFixed(1)"
+                        :percentage="myPokemonProgress"
                         status="success"
                     />
                 </el-col>
