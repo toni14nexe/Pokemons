@@ -14,10 +14,6 @@ const usersStore = useUsersStore();
 let pokedex = ref<any>([])
 let show = ref<string>('')
 
-const props = defineProps<{
-    component: any
-}>();
-
 watch(() => router.currentRoute.value.name, () => {
     show.value = router.currentRoute.value.name
 });
@@ -25,7 +21,7 @@ watch(() => router.currentRoute.value.name, () => {
 onMounted(() => {
     pokemonStore.getFirst151Pokemons()
     refreshUserData()
-    if(!props.component) show.value = router.currentRoute.value.name
+    show.value = router.currentRoute.value.name
 })
 
 async function refreshUserData(){
@@ -52,10 +48,9 @@ async function addPokemon(pokemon) {
 <template>
     <el-container>
         <el-col align="center">
-        {{ show }}
             <Search v-if="show == 'game/search'" :pokedex="pokedex" />
             <GuessPokemon v-else-if="show == 'game'" :pokedex="pokedex" @pokedex="(result) => addPokemon(result)" />
-            <Pokedex v-else :pokedex="pokedex" :component="component" />
+            <Pokedex v-else :pokedex="pokedex" :component="show" />
         </el-col>
     </el-container>
 </template>

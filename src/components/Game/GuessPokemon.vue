@@ -28,7 +28,7 @@ watch(() => props.pokedex, () => {
 });
 
 onMounted(() => {
-    getPokemonIds('firstPokemon')
+    getPokemonIds()
 })
 
 function getPokemonIds(loading){

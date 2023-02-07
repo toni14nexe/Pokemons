@@ -17,7 +17,6 @@ let errorResponse = ref<any>({
 let wrongUsernameOrPassword = ref<string>('')
 
 function switchTo(componentForSwitch){
-	router.push({ path: `/${componentForSwitch}/` })
 	emits('componentChange', componentForSwitch)
 }
 
@@ -35,7 +34,7 @@ async function login(){
                 if(response){
                     wrongUsernameOrPassword.value = ''
 	                emits('loggedIn')
-                    switchTo('game')
+                    switchTo('game/')
                 } else{
                     wrongUsernameOrPassword.value = 'Wrong username or password!'
                 }
