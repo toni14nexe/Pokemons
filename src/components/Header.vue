@@ -104,7 +104,7 @@ function logout(){
 				<el-menu-item index="pokedex-free" @click="switchTo('game/pokedex/free-pokemons')">Free Pokemons</el-menu-item>
 			</el-sub-menu>
 			<el-menu-item>
-				<Music />
+				<Music :music="firstMusic" />
 			</el-menu-item>
 			<el-menu-item
 				index="logout"

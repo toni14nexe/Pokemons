@@ -127,8 +127,12 @@ export const useUsersStore = defineStore("users", {
 		}
 	},
 	checkIfUserIsLoggedIn(){
+		let pathname = window.location.pathname
 		let userCookie = $cookies.get('user')
 		if(userCookie && userCookie.id){
+			if(pathname.includes('login') || pathname.includes('signup')){
+				router.push({ path: '/game' })
+			}
 			return { role: userCookie.role, username: userCookie.username }
 		} else{
 			return { role: '', username: '' }

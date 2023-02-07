@@ -9,7 +9,6 @@ import App from "./App.vue"
 import router from "./router"
 import VueCookies from 'vue-cookies'
 import "./css/main.css"
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 const app = createApp(App)
 
@@ -18,6 +17,5 @@ app.use(router)
 app.use(ElementPlus)
 app.use(VueAxios, axios)
 app.use(VueCookies)
-app.use(ElementPlusIconsVue)
 
 app.mount("#app")

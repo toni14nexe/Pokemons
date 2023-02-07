@@ -12,7 +12,7 @@ let title = ref<string>('')
 
 const props = defineProps<{
     pokedex: any,
-    component: string
+    component: any
 }>();
 
 watch(() => props.pokedex, () => {
