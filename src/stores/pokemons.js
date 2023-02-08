@@ -37,7 +37,11 @@ export const usePokemonStore = defineStore("pokemons", {
           let pokemon = {
             id: response.data.id,
             name: response.data.name,
-            image: response.data.sprites.front_default
+            image: response.data.sprites.front_default,
+            hp: response.data.stats[0].base_stat,
+            attack: response.data.stats[1].base_stat,
+            defense: response.data.stats[2].base_stat,
+            speed: response.data.stats[5].base_stat
           }
           if(!pokemon.image){
             pokemon.image = response.data.sprites.front_shiny
