@@ -86,7 +86,7 @@ h1 {
   min-width: 60vh;
   max-height: 80vh;
   padding: var(--spacing-5) 0 var(--spacing-5) 0;
-  overflow:scroll;
+  overflow: scroll;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -95,7 +95,7 @@ h1 {
   opacity: 1;
 }
 
-.router_small::-webkit-scrollbar-track  {
+.router_small::-webkit-scrollbar-track {
   margin-top: var(--spacing-5);
   margin-bottom: var(--spacing-5);
 }
@@ -106,10 +106,10 @@ h1 {
   border: 1.5px solid white;
 }
 
-.pokedex-image{
+.pokedex-image {
   min-width: 120px;
   min-height: 120px;
-  width: 120px; 
+  width: 120px;
   height: 120px;
 }
 
@@ -118,5 +118,14 @@ h1 {
     width: 100%;
     max-width: 100%;
     min-width: 0;
+  }
+}
+
+@media screen and (max-width: 439px) {
+  .pokedex-image {
+    min-width: 100%;
+    min-height: auto;
+    width: 100%;
+    height: auto;
   }
 }

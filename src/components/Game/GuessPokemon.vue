@@ -157,4 +157,10 @@ img{
     width: 40vh;
     height: 40vh;
 }
+
+@media screen and (max-width: 319px) {
+	img{
+		width: 35vh;
+	}
+}
 </style>

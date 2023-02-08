@@ -73,7 +73,7 @@ function logout(){
 		class="hover-pointer"
 		:default-active="component"
 		mode="horizontal"
-		:ellipsis="false"
+		menu-trigger="click"
 	>
 		<el-menu-item index="home" @click="switchTo('home')">
 			<el-space wrap>
@@ -83,15 +83,11 @@ function logout(){
 			</el-space>
 		</el-menu-item>
 		<div class="flex-grow" />
-			<el-menu-item v-if="!user.username.length" index="registration" @click="switchTo('signup')">SignUp</el-menu-item>
 			<el-menu-item v-if="!user.username.length" index="login" @click="switchTo('login')">Login</el-menu-item>
-			<el-menu-item 
-				index="dark-light" 
-				@click="darkLightMode = !darkLightMode">
-				<DarkLightMode :darkLightMode="darkLightMode" />
-			</el-menu-item>
+			<el-menu-item v-if="!user.username.length" index="registration" @click="switchTo('signup')">SignUp</el-menu-item>
 			<el-input
 				v-if="user.username.length"
+				style="width: 12rem; min-width: fit-content;"
 				placeholder="Search Pokemon"
 				v-model="search"
 				@keyup.enter="switchTo('game/search')"
@@ -110,10 +106,11 @@ function logout(){
 				<el-menu-item index="pokedex-my" @click="switchTo('game/pokedex/my-pokemons')">My Pokemons</el-menu-item>
 				<el-menu-item index="pokedex-free" @click="switchTo('game/pokedex/free-pokemons')">Free Pokemons</el-menu-item>
 			</el-sub-menu>
-			<el-menu-item>
+			<el-menu-item class="justify-center">
 				<Music :music="firstMusic" />
 			</el-menu-item>
 			<el-menu-item
+				class="justify-center"
 				index="logout"
 				v-if="user.username.length" 
 				@click="logout"
@@ -121,6 +118,13 @@ function logout(){
 				<el-icon size="35">
 					<SwitchButton />
 				</el-icon>
+			</el-menu-item>
+			<el-menu-item
+				class="justify-center mt-2 mb-2"
+				index="dark-light"
+				alignment="center"
+				@click="darkLightMode = !darkLightMode">
+				<DarkLightMode :darkLightMode="darkLightMode" />
 			</el-menu-item>
 	</el-menu>
 </template>

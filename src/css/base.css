@@ -88,3 +88,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: white;
 }
+
+@media screen and (max-width: 449px) {
+  span {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 319px) {
+  span {
+    font-size: 0.6rem;
+  }
+}
