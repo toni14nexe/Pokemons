@@ -97,8 +97,6 @@ h1 {
 @media screen and (max-width: 439px) {
   .pokedex-image {
     min-width: 100%;
-    min-height: auto;
     width: 100%;
-    height: auto;
   }
 }

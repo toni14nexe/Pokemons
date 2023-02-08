@@ -88,7 +88,7 @@ function changeTablePokemons(){
                                     <span>Defense: {{ pokemon.defense }}</span>
                                 </template>
                                     <template #reference>
-                                        <img :src="pokemon.image" />
+                                        <img :src="pokemon.image" class="pokedex-image" />
                                     </template>
                                 </el-popover>
                                 <el-skeleton-item v-else variant="image" class="pokedex-image" />

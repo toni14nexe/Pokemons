@@ -60,7 +60,23 @@ async function getSearch(){
                         <el-card :body-style="{ padding: 0 }" class="pb-3">
                             <el-skeleton class="pokedex-image mt-5">
                                 <template #template>
-                                    <img v-if="pokemonIds.includes(pokemon.id)" :src="pokemon.image" class="pokedex-image" />
+                                    <el-popover
+                                    v-if="pokemonIds.includes(pokemon.id)"
+                                    placement="top-start"
+                                    :title="pokemon.name[0].toUpperCase() + pokemon.name.slice(1)"
+                                    :width="200"
+                                    :trigger="'hover' || 'click'"
+                                    >
+                                    <template #default>
+                                        <span>HP: {{ pokemon.hp }}<br></span>
+                                        <span>Speed: {{ pokemon.speed }}<br></span>
+                                        <span>Attack: {{ pokemon.attack }}<br></span>
+                                        <span>Defense: {{ pokemon.defense }}</span>
+                                    </template>
+                                        <template #reference>
+                                            <img :src="pokemon.image" class="pokedex-image" />
+                                        </template>
+                                    </el-popover>
                                     <el-skeleton-item v-else variant="image" class="pokedex-image" />
                                 </template>
                             </el-skeleton>
