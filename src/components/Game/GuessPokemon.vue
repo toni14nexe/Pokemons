@@ -79,7 +79,7 @@ function submit(){
         wrong.value = true
         setTimeout(async () => {
             wrong.value = false
-        }, 2000);
+        }, 4000);
     }
     pokemonName.value = ''
     getRandomPokemon()
@@ -95,17 +95,17 @@ function submit(){
             <h1>Guess Pokemon</h1>
             <img v-if="!correct && !wrong && pokemon.image.length>0" :src="pokemon.image">
             <div v-if="correct">
-                <el-icon class="icon-size" color="var(--success-color)">
+                <el-icon class="icon-size" color="var(--my-success-color)">
                     <CircleCheck class="icon-size"/>
                 </el-icon>
-                <span style="color: var(--success-color)"><br>Correct!<br></span>
+                <span style="color: var(--my-success-color)"><br>Correct!<br></span>
             </div>
             <div v-if="wrong">
                 <el-icon class="icon-size" color="var(--danger-color)">
                     <CircleClose class="icon-size"/>
                 </el-icon>
                 <span style="color: var(--danger-color)"><br>Wrong!<br></span>
-                <span><br>That Pokemon was {{ showIfWrongPokemonName[0].toUpperCase() }}{{ showIfWrongPokemonName.slice(1) }}<br></span>
+                <h3><br>That Pokemon was <b style="color: var(--primary-color);">{{ showIfWrongPokemonName[0].toUpperCase() }}{{ showIfWrongPokemonName.slice(1) }}</b><br></h3>
             </div>
             <span></span>
             <el-input

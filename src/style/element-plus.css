@@ -1,3 +1,5 @@
+@import './base.css';
+
 .el-input {
     padding: var(--spacing-3) var(--spacing-3) var(--spacing-3) var(--spacing-3);
 }
@@ -8,4 +10,21 @@
 
 .el-skeleton {
     min-width: 60vh;
+}
+
+:root {
+    --el-color-primary: black;
+    --router-border-color: white;
+    --router-background: rgb(0, 0, 0, 0.5);
+    --my-success-color: #21ba45;
+    --app-background: rgb(0, 0, 0, 0.25);
+}
+
+:root.dark {
+    --el-color-primary: white;
+    --el-menu-bg-color: rgb(0, 0, 0, 0.95);
+    --router-border-color: black;
+    --router-background: rgb(0, 0, 0, 0.75);
+    --my-success-color: #21ba45;
+    --app-background: rgb(0, 0, 0, 0.5);
 }

@@ -7,7 +7,7 @@ h1 {
 }
 
 .bg-opacity {
-  background-color: rgb(0, 0, 0, 0.5);
+  background-color: var(--app-background);
   height: 92vh;
 }
 
@@ -52,9 +52,9 @@ h1 {
 }
 
 .router_small {
-  border: solid 1px white;
+  border: solid 1.5px var(--router-border-color);
   border-radius: 1rem;
-  background: rgb(0, 0, 0, 0.5);
+  background: var(--router-background);
   width: min-content;
   min-width: 60vh;
   max-height: 80vh;

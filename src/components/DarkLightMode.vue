@@ -30,7 +30,7 @@ function darkLightMode(){
         <el-icon size="35">
             <Sunny />
         </el-icon>
-        <el-avatar :size="40" class="mb-2">
+        <el-avatar :size="40" class="mb-2 ml-2">
             <el-icon size="35">
                 <Moon class="ml-1" />
             </el-icon>
@@ -42,7 +42,7 @@ function darkLightMode(){
                 <Sunny class="ml-1" />
             </el-icon>
         </el-avatar>
-        <el-icon size="35">
+        <el-icon class="ml-2" size="35">
             <Moon />
         </el-icon>
     </div>    
