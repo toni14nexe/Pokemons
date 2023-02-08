@@ -8,7 +8,7 @@ import VueAxios from 'vue-axios'
 import App from "./App.vue"
 import router from "./router"
 import VueCookies from 'vue-cookies'
-import "./css/main.css"
+import "./style/main.css"
 
 const app = createApp(App)
 
