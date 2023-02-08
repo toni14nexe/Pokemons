@@ -1,11 +1,12 @@
 <script setup lang="ts">
 // @ts-nocheck 
-import { ref, watch, onMounted } from "vue"
+import { ref, watch } from "vue"
 import { VideoPlay, VideoPause } from '@element-plus/icons-vue'
 import { useUsersStore } from "../stores/users";
 
 const usersStore = useUsersStore();
 let musicPlay = ref<boolean>(false)
+let everChanged = ref<boolean>(false)
 let audio = new Audio('https://instrumentalfx.co/wp-content/upload/11/Pokemon-Theme-Song.mp3?_=2')
 
 const props = defineProps<{
@@ -13,13 +14,13 @@ const props = defineProps<{
 }>();
 
 watch(() => props.music, () => {
-    playOrPauseMusic()
+    playOrStopMusic()
 });
 
-function playOrPauseMusic() {
+function playOrStopMusic() {
     if(musicPlay.value){
         musicPlay.value = false
-        audio.pause();
+        audio.load();
     } else{
         musicPlay.value = true
         audio.play();
@@ -37,7 +38,7 @@ async function refreshUserData(){
 </script>
 
 <template>
-    <el-icon @click="playOrPauseMusic()" class="hover-pointer" size="35">
+    <el-icon @click="playOrStopMusic()" class="hover-pointer" size="35">
         <VideoPause v-if="musicPlay" />
         <VideoPlay v-else />
     </el-icon>
