@@ -47,13 +47,16 @@ async function getSearch(){
 <template>
     <el-container>
         <el-col align="center">
-            <el-row v-if="!tablePokemons.length || !pokemonsStore.pokemons.length || isLoading">
+            <el-row v-if="!pokemonsStore.pokemons.length || isLoading">
                 <el-skeleton :rows="6" animated />
             </el-row>
             <div v-else>
                 <h1 class="mb-1">Search: {{ search }}</h1>
                 <el-row class="pl-2" :class="{'pr-2': tablePokemons.length < 10}" :gutter="5" >
-                    <el-col class="pb-1" v-bind:key="pokemon.id" v-for="pokemon in tablePokemons" :span="8">
+                    <el-col v-if="!tablePokemons.length" :span="24" align="center" class="mt-3 mb-5">
+                        <span>No results...</span>
+                    </el-col>
+                    <el-col v-else class="pb-1" v-bind:key="pokemon.id" v-for="pokemon in tablePokemons" :span="8">
                         <el-card :body-style="{ padding: 0 }" class="pb-3">
                             <el-skeleton class="pokedex-image mt-5">
                                 <template #template>
