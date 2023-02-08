@@ -42,7 +42,7 @@ function switchComponent(result){
 	/>
 	<el-main class="main bg-opacity">
 		<RouterView
-			:class="{ router_small: component != '/' && component != 'home' && component != '/home'}"
+			:class="{ router_small: component != '/' && component != 'home' && component != '/home' && component != '/home/'}"
 			@componentChange="(result) => switchComponent(result)"
 			:component="component"
 			@loggedIn="loggedIn++"

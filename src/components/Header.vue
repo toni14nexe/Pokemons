@@ -86,7 +86,6 @@ function logout(){
 			<el-menu-item v-if="!user.username.length" index="registration" @click="switchTo('signup')">SignUp</el-menu-item>
 			<el-menu-item v-if="!user.username.length" index="login" @click="switchTo('login')">Login</el-menu-item>
 			<el-menu-item 
-				v-if="user.username.length" 
 				index="dark-light" 
 				@click="darkLightMode = !darkLightMode">
 				<DarkLightMode :darkLightMode="darkLightMode" />
