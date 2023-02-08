@@ -35,8 +35,10 @@ async function getSearch(){
     pokemonIds.value = getUserPokemonsIds(props.pokedex)
     search.value = router.currentRoute.value.query.pokemon
     tablePokemons.value = pokemonsStore.pokemons
-    tablePokemons.value = tablePokemons.value.filter((pokemon) => { 
-        return pokemon.name.includes(search.value.toLowerCase()) 
+    tablePokemons.value = tablePokemons.value.filter((pokemon) => {
+        if(search.value){
+            return pokemon.name.includes(search.value.toLowerCase())
+        }
     })
     isLoading.value = false
 }
