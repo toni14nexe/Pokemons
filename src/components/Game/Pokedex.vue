@@ -9,6 +9,7 @@ let pokemonIds = ref<number[]>([])
 let tablePokemons = ref<any[]>([])
 let isLoading = ref<boolean>(true)
 let title = ref<string>('')
+let myPokemonProgress = ref<number>(0)
 
 const props = defineProps<{
     pokedex: any,
@@ -41,6 +42,7 @@ onMounted(() => {
 
 function getPokemonIds(){
     pokemonIds.value = getUserPokemonsIds(props.pokedex)
+    myPokemonProgress.value = parseFloat(((pokemonIds.value.length / 151) * 100).toFixed(1))
 }
 
 function changeTablePokemons(){
@@ -69,6 +71,14 @@ function changeTablePokemons(){
         </el-row>
         <div v-else>
             <h1 class="mb-1">{{ title }}</h1>
+            <span>My Pokemon progress</span>
+            <el-progress
+                class="mt-3 mb-5 ml-1 mr-1"
+                :text-inside="true"
+                :stroke-width="30"
+                :percentage="myPokemonProgress"
+                status="success"
+            />
             <el-row class="pl-2" :class="{'pr-2': tablePokemons.length < 10}" :gutter="5" >
                 <el-col class="pb-1" v-bind:key="pokemon.id" v-for="pokemon in tablePokemons" :span="8">
                     <el-card :body-style="{ padding: 0 }" class="pb-3">
