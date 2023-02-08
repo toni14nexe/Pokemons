@@ -33,7 +33,6 @@ function switchComponent(result){
 	component.value = result
 }
 </script>
-
 <template>
 	<Header 
 		class="header" 

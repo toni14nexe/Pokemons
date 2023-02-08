@@ -6,12 +6,14 @@ import { Search, SwitchButton } from '@element-plus/icons-vue'
 import { ElNotification } from 'element-plus'
 import { useUsersStore } from "../stores/users";
 import Music from "./Music.vue"
+import DarkLightMode from "./DarkLightMode.vue"
 
 const usersStore = useUsersStore();
 let component = ref('home')
 let search = ref<string>('')
 let user = ref<any>({ role: '', username: '' })
 let firstMusic = ref<boolean>(false)
+let darkLightMode = ref<boolean>(false)
 
 const props = defineProps<{
     loggedIn: number,
@@ -83,6 +85,12 @@ function logout(){
 		<div class="flex-grow" />
 			<el-menu-item v-if="!user.username.length" index="registration" @click="switchTo('signup')">SignUp</el-menu-item>
 			<el-menu-item v-if="!user.username.length" index="login" @click="switchTo('login')">Login</el-menu-item>
+			<el-menu-item 
+				v-if="user.username.length" 
+				index="dark-light" 
+				@click="darkLightMode = !darkLightMode">
+				<DarkLightMode :darkLightMode="darkLightMode" />
+			</el-menu-item>
 			<el-input
 				v-if="user.username.length"
 				placeholder="Search Pokemon"

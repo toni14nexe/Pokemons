@@ -37,7 +37,7 @@ async function refreshUserData(){
 </script>
 
 <template>
-    <el-icon @click="playOrPauseMusic()" class="music-icon hover-pointer" size="35">
+    <el-icon @click="playOrPauseMusic()" class="hover-pointer" size="35">
         <VideoPause v-if="musicPlay" />
         <VideoPlay v-else />
     </el-icon>
