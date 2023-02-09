@@ -22,6 +22,15 @@ npm run dev
 json-server --watch json-server/db.json
 ```
 
+### Login data
+
+You can sign up as new user or try test user:
+
+```sh
+username: test
+password: test1234
+```
+
 
 
 
