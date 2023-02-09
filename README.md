@@ -16,12 +16,6 @@ npm install
 npm run dev
 ```
 
-### Run JSON-Server
-
-```sh
-json-server --watch json-server/db.json
-```
-
 ### Login data
 
 You can sign up as new user or try test user:
@@ -31,9 +25,35 @@ username: test
 password: test1234
 ```
 
+# LOCAL DATABASE SERVER
 
+If you want to use local json file you must do 2 things:
 
+### 1 Run JSON-Server
 
+```sh
+json-server --watch json-server/db.json
+```
+
+### 2 Change url in user store
+
+src/store/user.js set serverHost in line 5 to:
+
+```sh
+"http://localhost:3000/users"
+
+```
+
+# ONLINE DATABASE SERVER
+
+### Change url in user store
+
+src/store/user.js set serverHost in line 5 to:
+
+```sh
+"https://my-json-server.typicode.com/toni14nexe/Pokemons/users"
+
+```
 
 ## Recommended IDE Setup
 
