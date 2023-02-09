@@ -91,11 +91,11 @@ h1 {
 }
 
 .favourite-star:hover {
-  color: var(--el-color-primary);
+  color: var(--secondary-color);
 }
 
 .notfavourite-star {
-  color: var(--el-color-primary);
+  color: var(--secondary-color);
 }
 
 .notfavourite-star:hover {

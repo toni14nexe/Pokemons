@@ -22,6 +22,10 @@ const props = defineProps<{
     component: any
 }>();
 
+const emits = defineEmits<{
+  (event: "reloadUserData")
+}>();
+
 watch(() => props.pokedex, () => {
     getPokemonIds()
 });
@@ -73,24 +77,24 @@ function changeTablePokemons(){
         tablePokemons.value = pokemonsStore.pokemons
     }
 }
-
 async function removeFromFavourite(pokemon){
     let response = false
     try {
         response = await userStore.removePokemonFromFavourites(pokemon)
-        getPokemonIds()
+		emits('reloadUserData')
     } catch (error) { throw error }
     if(response){
+        getPokemonIds()
         ElNotification({
             message: `${pokemon.name[0].toUpperCase() + pokemon.name.slice(1)} removed from favourites`,
-            type: 'success',
+            type: 'warning',
             offset: 60,
             showClose: false
         })
     } else{
         ElNotification({
             message: 'Something went wrong!',
-            type: 'warning',
+            type: 'error',
             offset: 60,
             showClose: false
         })
@@ -101,9 +105,10 @@ async function addToFavourite(pokemon){
     let response = false
     try {
         response = await userStore.addPokemonToFavourite(pokemon)
-        getPokemonIds()
+		emits('reloadUserData')
     } catch (error) { throw error }
     if(response){
+        getPokemonIds()
         ElNotification({
             message: `${pokemon.name[0].toUpperCase() + pokemon.name.slice(1)} added to favourites`,
             type: 'success',
@@ -113,7 +118,7 @@ async function addToFavourite(pokemon){
     } else{
         ElNotification({
             message: 'Something went wrong!',
-            type: 'warning',
+            type: 'error',
             offset: 60,
             showClose: false
         })
@@ -173,7 +178,15 @@ async function addToFavourite(pokemon){
                                     <span>Defense: {{ pokemon.defense }}<br><br></span>
                                 </template>
                                     <template #reference>
-                                        <img :src="pokemon.image" class="pokedex-image" />
+                                        <div>
+                                            <img :src="pokemon.image" class="pokedex-image" />
+                                            <el-icon
+                                                v-if=(favouritePokemons.includes(pokemon.id))
+                                                size="25" 
+                                                class="favourite-star on-image-star"
+                                                @click="addToFavourite(pokemon)"
+                                            ><StarFilled /></el-icon>
+                                        </div>
                                     </template>
                                 </el-popover>
                                 <el-skeleton-item v-else variant="image" class="pokedex-image" />
@@ -188,4 +201,9 @@ async function addToFavourite(pokemon){
 </template>
 
 <style scoped>
+    .on-image-star{
+        position:absolute;
+        top: var(--spacing-1);
+        right: var(--spacing-1);
+    }
 </style>
