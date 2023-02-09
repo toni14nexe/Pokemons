@@ -2,12 +2,18 @@
 
 This template should help get you started local Pokemon project.
 
-# RUN PROJECT
+# RUN LOCAL PROJECT
 
 ## Project Installation
 
 ```sh
 npm install
+```
+
+### Run JSON-Server
+
+```sh
+json-server --watch json-server/db.json
 ```
 
 ### Compile and Run Development
