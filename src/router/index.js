@@ -27,7 +27,7 @@ const router = createRouter({
 		{
 			path: "/game",
 			name: "game",
-			component: () => import("../views/GameHome.vue"),
+			component: () => import("../views/GameHome.vue")
 		},
 		{
 			path: "/game/pokedex",
@@ -60,7 +60,7 @@ const router = createRouter({
 		{
 			path: "/:catchAll(.*)",
 			name: "NotFound",
-			component: () => import("../views/PageNotFound.vue"),
+			component: () => import("../views/PageNotFound.vue")
 		}
 	]
 })

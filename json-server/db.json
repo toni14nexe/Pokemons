@@ -16,6 +16,18 @@
           "name": "butterfree",
           "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png",
           "favourite": true
+        },
+        {
+          "id": 100,
+          "name": "voltorb",
+          "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/100.png",
+          "favourite": true
+        },
+        {
+          "id": 150,
+          "name": "mewtwo",
+          "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
+          "favourite": false
         }
       ],
       "role": "user",
