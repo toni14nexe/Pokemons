@@ -2,7 +2,7 @@ import { defineStore } from "pinia"
 import axios from "axios"
 import router from "../router/index"
 
-let serverHost = "http://localhost:3000/users"
+let serverHost = "http://localhost:3000/users/"
 
 export const useUsersStore = defineStore("users", {
 	state: () => {

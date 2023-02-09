@@ -40,7 +40,7 @@ json-server --watch json-server/db.json
 src/store/user.js set serverHost in line 5 to:
 
 ```sh
-"http://localhost:3000/users"
+"http://localhost:3000/users/"
 
 ```
 
@@ -51,7 +51,7 @@ src/store/user.js set serverHost in line 5 to:
 src/store/user.js set serverHost in line 5 to:
 
 ```sh
-"https://my-json-server.typicode.com/toni14nexe/Pokemons/users"
+"https://my-json-server.typicode.com/toni14nexe/Pokemons/users/"
 
 ```
 
