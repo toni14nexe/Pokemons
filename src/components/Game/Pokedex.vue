@@ -187,7 +187,7 @@ async function addToFavourite(pokemon){
                                             <el-icon
                                                 v-if=(favouritePokemons.includes(pokemon.id))
                                                 size="25" 
-                                                class="favourite-star on-image-star"
+                                                class="on-image-star"
                                             ><StarFilled /></el-icon>
                                         </div>
                                     </template>
@@ -205,7 +205,8 @@ async function addToFavourite(pokemon){
 
 <style scoped>
     .on-image-star{
-        position:absolute;
+        color: var(--gold-color);
+        position: absolute;
         top: var(--spacing-1);
         right: var(--spacing-1);
     }
