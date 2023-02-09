@@ -86,6 +86,22 @@ h1 {
   height: 120px;
 }
 
+.favourite-star {
+  color: var(--gold-color);
+}
+
+.favourite-star:hover {
+  color: var(--el-color-primary);
+}
+
+.notfavourite-star {
+  color: var(--el-color-primary);
+}
+
+.notfavourite-star:hover {
+  color: var(--gold-color);
+}
+
 @media screen and (max-width: 549px) {
   .router_small {
     width: 100%;

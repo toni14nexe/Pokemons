@@ -70,6 +70,7 @@ function submit(){
     if(pokemonName.value == pokemon.value.name){
         correct.value = true
         pokemonIds.value.push(pokemon.value.id)
+        pokemon.value.favourite = false
         emits('pokedex', pokemon.value)
         setTimeout(async () => {
             correct.value = false

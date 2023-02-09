@@ -148,6 +148,47 @@ export const useUsersStore = defineStore("users", {
 		} else{
 			return { role: '', username: '' }
 		}
+	},
+	async addPokemonToFavourite(pokemon){
+		let userCookie = $cookies.get('user')
+		try {
+			let response = await this.getUser(userCookie.id)
+			response.data.pokedex = this.replacePokemon(response.data.pokedex, pokemon, true)
+			try {
+				await axios.put(`${serverHost}${userCookie.id}`, response.data)
+				this.refreshUserData()
+				return true
+			} catch (error) {
+				throw error
+			}
+		} catch (error) {
+			throw error;
+		}
+	},
+	async removePokemonFromFavourites(pokemon){
+		let userCookie = $cookies.get('user')
+		try {
+			let response = await this.getUser(userCookie.id)
+			response.data.pokedex = this.replacePokemon(response.data.pokedex, pokemon, false)
+			try {
+				await axios.put(`${serverHost}${userCookie.id}`, response.data)
+				this.refreshUserData()
+				return true
+			} catch (error) {
+				throw error
+			}
+		} catch (error) {
+			throw error;
+		}
+
+	},
+	replacePokemon(pokedex, pokemon, favourite){
+		pokedex.forEach((dexPokemon) => {
+			if(dexPokemon.id == pokemon.id){
+				dexPokemon.favourite = favourite
+			}
+		})
+		return pokedex
 	}
   }
 });

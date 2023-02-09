@@ -2,10 +2,16 @@
 // @ts-nocheck
 import { onMounted, ref, watch } from "vue"
 import { getUserPokemonsIds } from "../../composables/getPokemonsIds";
+import { getFavouritePokemons } from "../../composables/getFavourites";
 import { usePokemonStore } from "../../stores/pokemons";
+import { useUsersStore } from "../../stores/users";
+import { Star, StarFilled } from "@element-plus/icons-vue";
+import { ElNotification } from 'element-plus'
 
 const pokemonsStore = usePokemonStore();
+const userStore = useUsersStore();
 let pokemonIds = ref<number[]>([])
+let favouritePokemons = ref<number[]>([])
 let tablePokemons = ref<any[]>([])
 let isLoading = ref<boolean>(true)
 let title = ref<string>('')
@@ -43,6 +49,11 @@ onMounted(() => {
 function getPokemonIds(){
     pokemonIds.value = getUserPokemonsIds(props.pokedex)
     myPokemonProgress.value = parseFloat(((pokemonIds.value.length / 151) * 100).toFixed(1))
+    getFavourites()
+}
+
+function getFavourites(){
+    favouritePokemons.value = getFavouritePokemons(props.pokedex)
 }
 
 function changeTablePokemons(){
@@ -62,6 +73,52 @@ function changeTablePokemons(){
         tablePokemons.value = pokemonsStore.pokemons
     }
 }
+
+async function removeFromFavourite(pokemon){
+    let response = false
+    try {
+        response = await userStore.removePokemonFromFavourites(pokemon)
+        getPokemonIds()
+    } catch (error) { throw error }
+    if(response){
+        ElNotification({
+            message: `${pokemon.name[0].toUpperCase() + pokemon.name.slice(1)} removed from favourites`,
+            type: 'success',
+            offset: 60,
+            showClose: false
+        })
+    } else{
+        ElNotification({
+            message: 'Something went wrong!',
+            type: 'warning',
+            offset: 60,
+            showClose: false
+        })
+    }
+}
+
+async function addToFavourite(pokemon){
+    let response = false
+    try {
+        response = await userStore.addPokemonToFavourite(pokemon)
+        getPokemonIds()
+    } catch (error) { throw error }
+    if(response){
+        ElNotification({
+            message: `${pokemon.name[0].toUpperCase() + pokemon.name.slice(1)} added to favourites`,
+            type: 'success',
+            offset: 60,
+            showClose: false
+        })
+    } else{
+        ElNotification({
+            message: 'Something went wrong!',
+            type: 'warning',
+            offset: 60,
+            showClose: false
+        })
+    }
+}
 </script>
 
 <template>
@@ -69,7 +126,7 @@ function changeTablePokemons(){
         <el-row v-if="!tablePokemons.length || !pokemonsStore.pokemons.length || isLoading">
             <el-skeleton :rows="6" animated />
         </el-row>
-        <div v-else>
+        <div v-else style="width: 100%;">
             <h1 class="mb-1">{{ title }}</h1>
             <span>My Pokemon progress</span>
             <el-progress
@@ -87,15 +144,33 @@ function changeTablePokemons(){
                                 <el-popover
                                     v-if="pokemonIds.includes(pokemon.id)"
                                     placement="top-start"
-                                    :title="pokemon.name[0].toUpperCase() + pokemon.name.slice(1)"
                                     :width="200"
                                     :trigger="'hover' || 'click'"
                                 >
                                 <template #default>
-                                    <span>HP: {{ pokemon.hp }}<br></span>
+                                    <el-row justify="space-between">
+                                        <h3>{{ pokemon.name[0].toUpperCase() + pokemon.name.slice(1) }}</h3>
+                                        <el-icon 
+                                            size="25" 
+                                            v-if="favouritePokemons.includes(pokemon.id)" 
+                                            class="favourite-star hover-pointer"
+                                            @click="removeFromFavourite(pokemon)"
+                                        >
+                                            <StarFilled />
+                                        </el-icon>
+                                        <el-icon 
+                                            size="25" 
+                                            v-else
+                                            class="notfavourite-star hover-pointer"
+                                            @click="addToFavourite(pokemon)"
+                                        >
+                                            <Star />
+                                        </el-icon>
+                                    </el-row>
+                                    <span><br>HP: {{ pokemon.hp }}<br></span>
                                     <span>Speed: {{ pokemon.speed }}<br></span>
                                     <span>Attack: {{ pokemon.attack }}<br></span>
-                                    <span>Defense: {{ pokemon.defense }}</span>
+                                    <span>Defense: {{ pokemon.defense }}<br><br></span>
                                 </template>
                                     <template #reference>
                                         <img :src="pokemon.image" class="pokedex-image" />
