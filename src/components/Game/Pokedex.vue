@@ -64,7 +64,11 @@ function changeTablePokemons(){
     tablePokemons.value = []
     if(props.component == 'pokedexMy'){
         title.value = 'My Pokemons'
-        tablePokemons.value = props.pokedex
+        pokemonsStore.pokemons.forEach(pokemon => {
+            if(pokemonIds.value.includes(pokemon.id)){
+                tablePokemons.value.push(pokemon)
+            }
+        });
     } else if(props.component == 'pokedexFree'){
         title.value = 'Free Pokemons'
         pokemonsStore.pokemons.forEach(pokemon => {
@@ -184,7 +188,6 @@ async function addToFavourite(pokemon){
                                                 v-if=(favouritePokemons.includes(pokemon.id))
                                                 size="25" 
                                                 class="favourite-star on-image-star"
-                                                @click="addToFavourite(pokemon)"
                                             ><StarFilled /></el-icon>
                                         </div>
                                     </template>

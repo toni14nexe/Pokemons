@@ -45,7 +45,7 @@ async function getRandomPokemon() {
             try {
                 pokemon.value = await pokemonStore.getOnePokemon(randomNum)
 
-                /* Delete this console log */
+                /* Delete this... or not... This might help you if you aren't Pokemon expert like me ;) he he */
                 console.log(pokemon.value)
 
                 loading.value = false
