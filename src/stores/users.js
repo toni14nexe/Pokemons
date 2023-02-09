@@ -2,7 +2,7 @@ import { defineStore } from "pinia"
 import axios from "axios"
 import router from "../router/index"
 
-let serverHost = "https://api.jsonserver.io/users"
+let serverHost = "https://my-json-server.typicode.com/toni14nexe/Pokemons/users"
 
 export const useUsersStore = defineStore("users", {
 	state: () => {
