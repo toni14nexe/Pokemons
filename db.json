@@ -1,0 +1,125 @@
+{
+    "users": [
+        {
+            "email": "test@mail.com",
+            "username": "test",
+            "password": "test1234",
+            "pokedex": [
+                {
+                    "id": 25,
+                    "name": "pikachu",
+                    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+                    "favourite": true
+                },
+                {
+                    "id": 12,
+                    "name": "butterfree",
+                    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png",
+                    "favourite": true
+                },
+                {
+                    "id": 100,
+                    "name": "voltorb",
+                    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/100.png",
+                    "favourite": true
+                },
+                {
+                    "id": 150,
+                    "name": "mewtwo",
+                    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
+                    "favourite": false
+                },
+                {
+                    "id": 73,
+                    "name": "tentacruel",
+                    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/73.png",
+                    "favourite": false
+                },
+                {
+                    "id": 104,
+                    "name": "cubone",
+                    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/104.png",
+                    "favourite": false
+                },
+                {
+                    "id": 89,
+                    "name": "muk",
+                    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/89.png",
+                    "favourite": false
+                },
+                {
+                    "id": 141,
+                    "name": "kabutops",
+                    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/141.png",
+                    "favourite": false
+                },
+                {
+                    "id": 123,
+                    "name": "scyther",
+                    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/123.png",
+                    "favourite": false
+                },
+                {
+                    "id": 91,
+                    "name": "cloyster",
+                    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/91.png",
+                    "favourite": true
+                },
+                {
+                    "id": 99,
+                    "name": "kingler",
+                    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/99.png",
+                    "favourite": false
+                },
+                {
+                    "id": 23,
+                    "name": "ekans",
+                    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/23.png",
+                    "favourite": false
+                },
+                {
+                    "id": 46,
+                    "name": "paras",
+                    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/46.png",
+                    "favourite": false
+                },
+                {
+                    "id": 86,
+                    "name": "seel",
+                    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/86.png",
+                    "favourite": false
+                },
+                {
+                    "id": 42,
+                    "name": "golbat",
+                    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/42.png",
+                    "favourite": false
+                },
+                {
+                    "id": 33,
+                    "name": "nidorino",
+                    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/33.png",
+                    "favourite": false
+                }
+            ],
+            "role": "user",
+            "id": 2
+        },
+        {
+            "email": "ahaha@mail.com",
+            "username": "ahaha",
+            "password": "test1234",
+            "pokedex": [],
+            "role": "user",
+            "id": 3
+        },
+        {
+            "email": "grga@mail.com",
+            "username": "grga",
+            "password": "grgabeer",
+            "pokedex": [],
+            "role": "user",
+            "id": 4
+        }
+    ]
+}
