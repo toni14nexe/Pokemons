@@ -87,7 +87,7 @@ function logout(){
 			<el-menu-item v-if="!user.username.length" index="registration" @click="switchTo('signup')">SignUp</el-menu-item>
 			<el-input
 				v-if="user.username.length"
-				style="width: 12rem; min-width: fit-content;"
+				class="search-input"
 				placeholder="Search Pokemon"
 				v-model="search"
 				@keyup.enter="switchTo('game/search')"
@@ -139,9 +139,23 @@ function logout(){
   flex-grow: 1;
 }
 
+.search-input{
+	width: 12rem; 
+	min-width: fit-content; 
+	height: 50px;
+	align-self: center;
+}
+
 @media screen and (max-width: 300px) {
 	.ml-3{
 		margin-left: 0;
+	}
+}
+
+@media screen and (max-height: 649px) {
+	.logo-fix{
+		width: auto;
+		height: 30px;
 	}
 }
 </style>

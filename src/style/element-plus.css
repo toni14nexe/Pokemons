@@ -12,6 +12,10 @@
     min-width: 60vh;
 }
 
+.el-menu {
+    max-height: 4.5rem;
+}
+
 :root {
     --el-color-primary: black;
     --router-border-color: white;
